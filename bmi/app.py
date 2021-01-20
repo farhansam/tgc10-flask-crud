@@ -8,12 +8,12 @@ def show_form():
     return render_template('base.template.html')
 
 @app.route('/bmi', methods=["POST"])
-def sum_num():
+def process_bmi():
     print(request.form)
-    weight = int(request.form.get('weight'))
-    height = int(request.form.get('height'))
-    bmi = weight / (height/100)**2
-    return str(bmi)
+    weight = float(request.form.get('weight'))
+    height = float(request.form.get('height'))
+    bmi = round(weight / (height/100)**2, 2)
+    return render_template('bmi_results.template.html', bmi=bmi)
 
 
 # "magic code" -- boilerplate
